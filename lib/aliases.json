@@ -1,0 +1,7 @@
+{
+  "pdf-to-jpg": "/tools/pdf-to-images",
+  "pdf-to-png": "/tools/pdf-to-images",
+  "gst-calculator-duplicate": "/tools/gst-calculator",
+  "fuel-cost-calculator-duplicate": "/tools/fuel-cost-calculator",
+  "live-currency-converter": "/tools/currency-converter"
+}

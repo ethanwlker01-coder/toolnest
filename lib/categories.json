@@ -1,0 +1,72 @@
+[
+  {
+    "slug": "pdf-documents",
+    "name": "PDF & Documents",
+    "title": "Free PDF Tools — Convert, Merge and Organize Files",
+    "description": "Browser-based PDF tools for common document workflows. Check each tool's supported formats and processing limitations before using sensitive or large files.",
+    "category": "PDF & Documents"
+  },
+  {
+    "slug": "image-graphics",
+    "name": "Image & Graphics",
+    "title": "Free Image Tools — Convert, Resize and Compress Images",
+    "description": "Convert, resize, crop and prepare image files for websites and everyday use. Use output previews and verify dimensions and file formats after conversion.",
+    "category": "Image & Graphics"
+  },
+  {
+    "slug": "calculators",
+    "name": "Calculators",
+    "title": "Free Online Calculators — Loans, Percentages and More",
+    "description": "Calculate common values with transparent inputs and assumptions. Financial and health-related calculators provide estimates, not personalized professional advice.",
+    "category": "Calculators"
+  },
+  {
+    "slug": "text-writing",
+    "name": "Text & Writing",
+    "title": "Free Text Tools — Word Count, Case and Text Utilities",
+    "description": "Count, compare, clean and transform text with browser-based utilities. Text inputs can contain private material, so confirm the tool runs locally before using confidential text.",
+    "category": "Text & Writing"
+  },
+  {
+    "slug": "developer-tools",
+    "name": "Developer Tools",
+    "title": "Free Developer Tools — JSON, Base64, URL and Hash Utilities",
+    "description": "Browser utilities for developers, including formatters, encoders, decoders and network helpers. Sensitive tokens are handled cautiously; decoding does not validate authentication.",
+    "category": "Developer Tools"
+  },
+  {
+    "slug": "seo-marketing",
+    "name": "SEO & Marketing",
+    "title": "Free SEO Tools — Meta Tags, Schema and Campaign URLs",
+    "description": "Create common technical SEO assets and campaign URLs. Generated markup is a starting point; validate it against current search-engine documentation before publishing.",
+    "category": "SEO & Marketing"
+  },
+  {
+    "slug": "india-freelancers",
+    "name": "India & Freelancers",
+    "title": "Free India Tools — GST, CGPA, Invoice and WhatsApp Links",
+    "description": "Useful tools for Indian students, freelancers and small businesses. Confirm university grading rules and current tax requirements before relying on generated results.",
+    "category": "India & Freelancers"
+  },
+  {
+    "slug": "utilities",
+    "name": "Utilities",
+    "title": "Free Everyday Tools — Passwords, QR Codes and Date Calculators",
+    "description": "Practical utilities for random values, passwords, QR codes and dates. Security and health-related results have important limitations, which are noted on their pages.",
+    "category": "Utilities"
+  },
+  {
+    "slug": "games",
+    "name": "Games",
+    "title": "Free Browser Games and Mini Puzzles",
+    "description": "A collection of small browser game ideas and mini-puzzles. Only games marked as playable after testing should be published and indexed in production.",
+    "category": "Games"
+  },
+  {
+    "slug": "backend-advanced",
+    "name": "Backend / Advanced",
+    "title": "Advanced Online Tools — API-Dependent and Specialized Tasks",
+    "description": "Advanced tools that need APIs, specialist processing or additional product review. Limitations are stated clearly; unsafe platform downloading and encryption bypass are not provided.",
+    "category": "Backend / Advanced"
+  }
+]

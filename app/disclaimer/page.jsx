@@ -1,0 +1,5 @@
+import Link from "next/link";
+export const metadata = { title: "Disclaimer", alternates: { canonical: `${process.env.NEXT_PUBLIC_SITE_URL || "https://toolnest.qd.je"}/disclaimer` } };
+export default function Page() {
+  return <><header className="site-header"><div className="header-inner"><Link className="brand" href="/">Tool<span>Nest</span></Link><Link href="/">All tools</Link></div></header><main id="main" className="container"><div className="breadcrumbs"><Link href="/">Home</Link> / Disclaimer</div><h1>Disclaimer</h1><div className="panel" style={{maxWidth: "850px"}}><p>Tools are offered for general informational and productivity purposes. Financial, health, legal and technical results can depend on assumptions, jurisdiction, data quality and changing third-party information. Confirm important outputs independently. This site does not replace medical, legal, tax, investment or professional advice. Some tools are deliberately limited where an accurate or policy-compliant implementation needs a trusted data source or backend.</p></div></main></>;
+}

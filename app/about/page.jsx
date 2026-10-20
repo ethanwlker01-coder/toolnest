@@ -1,0 +1,5 @@
+import Link from "next/link";
+export const metadata = { title: "About", alternates: { canonical: `${process.env.NEXT_PUBLIC_SITE_URL || "https://toolnest.qd.je"}/about` } };
+export default function Page() {
+  return <><header className="site-header"><div className="header-inner"><Link className="brand" href="/">Tool<span>Nest</span></Link><Link href="/">All tools</Link></div></header><main id="main" className="container"><div className="breadcrumbs"><Link href="/">Home</Link> / About ToolNest</div><h1>About ToolNest</h1><div className="panel" style={{maxWidth: "850px"}}><p>ToolNest is a collection of small browser utilities intended to help people finish everyday tasks with fewer steps. Tools are grouped by task so visitors can find a converter, calculator, text helper or developer utility. Some advanced features need additional integrations; the page for each tool should state any limitation clearly. Some advanced tools depend on specialist processing or external services and are labelled accordingly. Tool availability and limits are stated on each page.</p></div></main></>;
+}

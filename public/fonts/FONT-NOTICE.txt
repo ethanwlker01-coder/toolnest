@@ -1,0 +1,3 @@
+Lohit Devanagari font asset
+
+This project bundles Lohit Devanagari for Hindi text in the basic text-extraction Word-to-PDF tool. The font is from the system-provided Lohit Devanagari package. Before redistributing this project publicly, verify and include the exact upstream font licence and copyright notice from the package/source distribution. Do not remove the font asset without also removing the Hindi-font code path.
