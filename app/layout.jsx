@@ -2,7 +2,7 @@ import "./globals.css";
 import AnalyticsTracker from "../components/AnalyticsTracker";
 import Script from "next/script";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://toolnest.qd.je";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://toolnest-lyart.vercel.app";
 
 export const metadata = {
   metadataBase: new URL(siteUrl),
