@@ -1,6 +1,6 @@
 import tools from "../lib/tools.json";
 import categories from "../lib/categories.json";
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://toolnest-lyart.vercel.app";
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://toolnest-lyart.vercel.app").replace(/\/+$/, "");
 export default function sitemap() {
   const now = new Date();
   return [
