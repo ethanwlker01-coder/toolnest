@@ -2,6 +2,7 @@ import Link from "next/link";
 import tools from "../lib/tools.json";
 import categories from "../lib/categories.json";
 import AdSlot from "../components/AdSlot";
+import AdsterraNativeBanner from "../components/AdsterraNativeBanner";
 
 const groups = [...new Set(tools.map((t) => t.category))];
 
@@ -34,7 +35,13 @@ export default function HomePage() {
           </div>
           <p className="small muted">Privacy note: only claim that data stays on your device for tools that truly process everything locally. Some advanced conversions may require a browser library or a separately configured API.</p>
         </section>
+
         <AdSlot slot={process.env.NEXT_PUBLIC_ADSENSE_HOME_SLOT} />
+
+        <section className="adsterra-placement">
+          <AdsterraNativeBanner />
+        </section>
+
         <section id="categories">
           {groups.map((category) => {
             const entries = tools.filter((t) => t.category === category);
