@@ -99,6 +99,28 @@ button.secondary:hover { background:#d8e1ea; }
 /* Owner console: no public navigation link; password-protected API session is required */
 .owner-page{max-width:1100px;margin:0 auto;padding:28px 18px;color:#172033}.owner-page h1{margin:0 0 5px}.owner-page h2{margin:0 0 16px}.owner-page p{line-height:1.5}.owner-login{max-width:400px;margin:10vh auto;padding:26px;border:1px solid #dbe2ea;border-radius:16px;display:grid;gap:15px;background:#fff;box-shadow:0 12px 40px #0f172a0d}.owner-header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:22px}.owner-actions{display:flex;gap:8px}.owner-actions button+button{background:#475569}.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px;margin:20px 0}.stat-card,.owner-card{background:#fff;border:1px solid #dbe2ea;border-radius:14px;padding:18px}.stat-card span{display:block;color:#64748b;font-size:13px}.stat-card strong{display:block;font-size:30px;margin-top:8px}.owner-card{margin:16px 0}.report-list{display:grid;gap:12px}.report-item{padding:14px;border:1px solid #e2e8f0;border-radius:10px;overflow-wrap:anywhere}.report-top{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}.report-top span,.owner-note{font-size:12px;color:#64748b}.report-item pre{white-space:pre-wrap;font:inherit;background:#f8fafc;padding:12px;border-radius:8px}.report-item label{display:flex;align-items:center;gap:10px;font-size:13px}.report-item select{max-width:180px}.table-wrap{overflow:auto}.owner-page table{width:100%;border-collapse:collapse}.owner-page th,.owner-page td{text-align:left;padding:10px;border-bottom:1px solid #e2e8f0;font-size:13px}.owner-page a{color:#1d4ed8}.owner-note{margin-top:20px}@media(max-width:600px){.owner-header{align-items:flex-start;flex-direction:column}.owner-actions{width:100%}.owner-actions button{flex:1}}
 
+.adsterra-native-wrap {
+  width: 100%;
+  max-width: 900px;
+  margin: 24px auto;
+  padding: 12px;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.ad-label {
+  margin: 0 0 8px;
+  font-size: 11px;
+  color: #777;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.adsterra-native-wrap iframe,
+.adsterra-native-wrap img {
+  max-width: 100%;
+}
+
 
 /* AdSense placements remain hidden unless valid publisher/slot IDs are configured. */
 .ad-slot { width: 100%; min-width: 0; margin: 22px 0; text-align: center; overflow: hidden; }
