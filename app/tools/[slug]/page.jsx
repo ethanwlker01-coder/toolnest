@@ -4,8 +4,12 @@ import tools from "../../../lib/tools.json";
 import ToolClient from "../../../components/ToolClient";
 import BugReport from "../../../components/BugReport";
 import AdSlot from "../../../components/AdSlot";
+import AdsterraNativeBanner from "../../../components/AdsterraNativeBanner";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://toolnest.qd.je";
+const siteUrl = (
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  "https://toolnest-lyart.vercel.app"
+).replace(/\/+$/, "");
 
 export function generateStaticParams() {
   return tools.map((tool) => ({ slug: tool.slug }));
@@ -79,6 +83,7 @@ export default async function ToolPage({ params }) {
           </aside>
         </div>
         <AdSlot slot={process.env.NEXT_PUBLIC_ADSENSE_TOOL_BOTTOM_SLOT} />
+                <AdsterraNativeBanner />
         <article className="tool-copy">
           <section><h2>How to use {tool.name}</h2>
             <ol>{(tool.howTo || []).map((step, i) => <li key={i}>{step}</li>)}</ol>
