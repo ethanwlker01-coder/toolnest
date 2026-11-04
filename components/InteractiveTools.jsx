@@ -77,14 +77,206 @@ function TypingTest({ hindi = false }) {
   const passage = hindi
     ? "मेरा भारत एक सुंदर देश है। यहाँ अनेक भाषाएँ, संस्कृतियाँ और परंपराएँ हैं। हमें अपने ज्ञान और कौशल को लगातार बेहतर बनाना चाहिए।"
     : "Clear writing helps people understand ideas quickly. Practice typing with steady accuracy before trying to increase your speed. A reliable result depends on correct characters, not just fast keystrokes.";
-  const [started,setStarted]=useState(false); const [seconds,setSeconds]=useState(60); const [value,setValue]=useState(""); const [finished,setFinished]=useState(false);
-  useEffect(()=>{if(!started||finished)return;const id=setInterval(()=>setSeconds(s=>{if(s<=1){setFinished(true);return 0;}return s-1;}),1000);return()=>clearInterval(id);},[started,finished]);
-  const correct=value.split("").filter((ch,i)=>ch===passage[i]).length;
-  const accuracy=value.length?Math.round(correct/value.length*100):0;
-  const wpm=Math.round((value.trim()?value.trim().split(/\s+/).length:0)/Math.max(1,(60-seconds)/60));
-  const reset=()=>{setStarted(false);setFinished(false);setSeconds(60);setValue("");};
-  return <div className="interactive-tool"><p>Type the passage below as accurately as you can. The 60-second timer starts when you begin typing.</p><div className="result"><p lang={hindi?"hi":"en"}>{passage}</p></div><label htmlFor="typing-entry">Your typing</label><textarea id="typing-entry" value={value} disabled={finished} onChange={e=>{if(!started)setStarted(true);setValue(e.target.value.slice(0,passage.length));}} placeholder="Start typing the passage here…"/><div className="actions"><Button onClick={reset}>Restart test</Button><span className="small">Time: {seconds}s · WPM: {wpm} · Accuracy: {accuracy}%</span></div>{finished&&<p aria-live="polite">Test complete. Final speed: {wpm} WPM; character accuracy: {accuracy}%.</p>}</div>;
+
+  const [started, setStarted] = useState(false);
+  const [seconds, setSeconds] = useState(60);
+  const [value, setValue] = useState("");
+  const [finished, setFinished] = useState(false);
+
+  const [startAt, setStartAt] = useState(null);
+  const [deadline, setDeadline] = useState(null);
+  const [endAt, setEndAt] = useState(null);
+
+  // Hindi matras and combined characters are counted as one character.
+  const getCharacters = (text) => {
+    if (
+      typeof Intl !== "undefined" &&
+      typeof Intl.Segmenter === "function"
+    ) {
+      const segmenter = new Intl.Segmenter(
+        hindi ? "hi" : "en",
+        { granularity: "grapheme" }
+      );
+
+      return Array.from(
+        segmenter.segment(text),
+        (item) => item.segment
+      );
+    }
+
+    return Array.from(text);
+  };
+
+  // Start the test only when the user begins typing.
+  const startTest = () => {
+    const now = Date.now();
+
+    setStarted(true);
+    setStartAt(now);
+    setDeadline(now + 60000);
+    setSeconds(60);
+  };
+
+  // Use an absolute deadline so background tabs do not distort the timer.
+  useEffect(() => {
+    if (!started || finished || !deadline) return;
+
+    const updateTimer = () => {
+      const remaining = Math.max(0, deadline - Date.now());
+
+      setSeconds(Math.ceil(remaining / 1000));
+
+      if (remaining <= 0) {
+        setSeconds(0);
+        setEndAt(deadline);
+        setFinished(true);
+      }
+    };
+
+    updateTimer();
+
+    const timerId = setInterval(updateTimer, 200);
+
+    return () => clearInterval(timerId);
+  }, [started, finished, deadline]);
+
+  const targetChars = getCharacters(passage);
+  const typedChars = getCharacters(value);
+
+  const correct = typedChars.reduce((count, character, index) => {
+    return count + (character === targetChars[index] ? 1 : 0);
+  }, 0);
+
+  const accuracy = typedChars.length
+    ? Math.round((correct / typedChars.length) * 100)
+    : 0;
+
+  const wordsTyped = value.trim()
+    ? value.trim().split(/\s+/u).length
+    : 0;
+
+  const elapsedMs = started && startAt
+    ? Math.max(
+        0,
+        Math.min(60000, (endAt ?? Date.now()) - startAt)
+      )
+    : 0;
+
+  const elapsedMinutes = elapsedMs / 60000;
+
+  const wpm = elapsedMinutes > 0
+    ? Math.round(wordsTyped / elapsedMinutes)
+    : 0;
+
+  const finishTest = () => {
+    if (!started || finished) return;
+
+    setEndAt(Date.now());
+    setFinished(true);
+  };
+
+  const reset = () => {
+    setStarted(false);
+    setFinished(false);
+    setSeconds(60);
+    setValue("");
+    setStartAt(null);
+    setDeadline(null);
+    setEndAt(null);
+  };
+
+  return (
+    <div className="interactive-tool">
+      <p>
+        {hindi
+          ? "नीचे दिए गए हिंदी पैराग्राफ को सही तरीके से टाइप करें। टाइप करना शुरू करते ही 60 सेकंड का टाइमर शुरू होगा।"
+          : "Type the passage below as accurately as possible. The 60-second timer starts when you begin typing."}
+      </p>
+
+      <div className="result">
+        <p lang={hindi ? "hi" : "en"}>
+          {passage}
+        </p>
+      </div>
+
+      <label htmlFor="typing-entry">
+        {hindi ? "यहाँ टाइप करें" : "Your typing"}
+      </label>
+
+      <textarea
+        id="typing-entry"
+        value={value}
+        disabled={finished}
+        onChange={(e) => {
+          if (!started) startTest();
+          setValue(e.target.value);
+        }}
+        onPaste={(e) => e.preventDefault()}
+        onDrop={(e) => e.preventDefault()}
+        spellCheck={false}
+        placeholder={
+          hindi
+            ? "यहाँ टाइप करना शुरू करें..."
+            : "Start typing the passage here..."
+        }
+      />
+
+      <div className="result">
+        <div className="small">
+          <strong>Time Left:</strong> {seconds}s
+        </div>
+
+        <div className="small">
+          <strong>{hindi ? "शब्द प्रति मिनट" : "Words Per Minute"}:</strong> {wpm}
+        </div>
+
+        <div className="small">
+          <strong>{hindi ? "सटीकता" : "Accuracy"}:</strong> {accuracy}%
+        </div>
+
+        <div className="small">
+          <strong>{hindi ? "टाइप किए गए शब्द" : "Words Typed"}:</strong> {wordsTyped}
+        </div>
+      </div>
+
+      <div className="actions">
+        <Button onClick={reset}>
+          {hindi ? "दोबारा शुरू करें" : "Restart Test"}
+        </Button>
+
+        {started && !finished && (
+          <Button onClick={finishTest}>
+            {hindi ? "टेस्ट समाप्त करें" : "Finish Test"}
+          </Button>
+        )}
+      </div>
+
+      {finished && (
+        <div className="result" aria-live="polite">
+          <h3>
+            {hindi ? "टेस्ट पूरा हुआ!" : "Test Completed!"}
+          </h3>
+
+          <p>
+            {hindi ? "आपकी टाइपिंग स्पीड:" : "Typing Speed:"}{" "}
+            <strong>{wpm} words/min</strong>
+          </p>
+
+          <p>
+            {hindi ? "आपकी सटीकता:" : "Your Accuracy:"}{" "}
+            <strong>{accuracy}%</strong>
+          </p>
+
+          <p>
+            {hindi ? "कुल टाइप किए गए शब्द:" : "Total Words Typed:"}{" "}
+            <strong>{wordsTyped}</strong>
+          </p>
+        </div>
+      )}
+    </div>
+  );
 }
+
 
 export default function InteractiveTools({ slug }) {
   if (["stopwatch-timer","countdown-timer","pomodoro-timer"].includes(slug)) return <TimerTool slug={slug}/>;
