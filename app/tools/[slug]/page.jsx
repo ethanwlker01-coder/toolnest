@@ -115,7 +115,7 @@ export default async function ToolPage({ params }) {
           {related.length > 0 && <section><h2>More {tool.category} tools</h2><p>{related.map((r, i) => <span key={r.slug}>{i > 0 ? " · " : ""}<Link href={`/tools/${r.slug}`}>{r.name}</Link></span>)}</p></section>}
         </article>
         {canIndex && <AdZone placement="bottom" />}
-        <footer className="footer"><div className="footer-nav"><Link href="/">All tools</Link><Link href="/about">About</Link><Link href="/privacy">Privacy</Link><Link href="/disclaimer">Disclaimer</Link></div><p>ToolNest provides free general-purpose utilities. Always review results before relying on them.</p></footer>
+        <footer className="footer"><div className="footer-nav"><Link href="/">All tools</Link><Link href="/about">About</Link><Link href="/contact">Contact</Link><Link href="/privacy">Privacy</Link><Link href="/disclaimer">Disclaimer</Link></div><p>ToolNest provides free general-purpose utilities. Always review results before relying on them.</p></footer>
       </main>
       {canIndex ? <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} /> : null}
     </>

@@ -32,7 +32,7 @@ export const metadata = {
 
 const adsenseClient = /^ca-pub-\d{10,}$/.test(process.env.NEXT_PUBLIC_ADSENSE_CLIENT || "")
   ? process.env.NEXT_PUBLIC_ADSENSE_CLIENT
-  : "";
+  : "ca-pub-7526438521592642";
 
 export default function RootLayout({ children }) {
   return (

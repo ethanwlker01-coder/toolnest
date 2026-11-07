@@ -8,6 +8,7 @@ export default function sitemap() {
     { url: siteUrl, lastModified, changeFrequency: "weekly", priority: 1 },
     ...categories.map((c) => ({ url: `${siteUrl}/category/${c.slug}`, lastModified, changeFrequency: "monthly", priority: 0.7 })),
     { url: `${siteUrl}/about`, lastModified, changeFrequency: "yearly", priority: 0.3 },
+    { url: `${siteUrl}/contact`, lastModified, changeFrequency: "yearly", priority: 0.3 },
     { url: `${siteUrl}/privacy`, lastModified, changeFrequency: "yearly", priority: 0.2 },
     { url: `${siteUrl}/disclaimer`, lastModified, changeFrequency: "yearly", priority: 0.2 },
     ...(indexingEnabled

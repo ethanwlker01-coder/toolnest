@@ -85,7 +85,7 @@ export default function HomePage() {
         </section>
         <AdSlot slot={process.env.NEXT_PUBLIC_ADSENSE_FOOTER_SLOT} />
         <footer className="footer">
-          <div className="footer-nav"><Link href="/about">About</Link><Link href="/privacy">Privacy</Link><Link href="/disclaimer">Disclaimer</Link></div>
+          <div className="footer-nav"><Link href="/about">About</Link><Link href="/contact">Contact</Link><Link href="/privacy">Privacy</Link><Link href="/disclaimer">Disclaimer</Link></div>
           <p>Tools are provided as general utilities. Review results before using them for financial, health, legal or production-critical decisions.</p>
         </footer>
       </main>
