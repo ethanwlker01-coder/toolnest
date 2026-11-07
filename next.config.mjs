@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const adHosts = new Set(["bauval.org"]);
+try { if (process.env.NEXT_PUBLIC_ADSTERRA_BANNER_HOST) adHosts.add(process.env.NEXT_PUBLIC_ADSTERRA_BANNER_HOST); } catch {}
 for (const k of ["RESULT", "SIDEBAR", "BOTTOM"]) {
   try { adHosts.add(new URL(process.env[`NEXT_PUBLIC_ADSTERRA_${k}_SRC`]).host); } catch {}
 }
