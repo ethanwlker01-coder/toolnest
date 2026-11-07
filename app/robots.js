@@ -1,8 +1,8 @@
-const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://toolnest-lyart.vercel.app").replace(/\/+$/, "");
+import { siteUrl } from "../lib/site";
+
 export default function robots() {
   return {
-    rules: { userAgent: "*", allow: "/", disallow: ["/api/"] },
-    sitemap: `${siteUrl}/sitemap.xml`,
-    host: siteUrl
+    rules: { userAgent: "*", allow: "/", disallow: ["/api/", "/search"] },
+    sitemap: `${siteUrl}/sitemap.xml`
   };
 }

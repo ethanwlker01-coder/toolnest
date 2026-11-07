@@ -2,10 +2,7 @@ import "./globals.css";
 import AnalyticsTracker from "../components/AnalyticsTracker";
 import Script from "next/script";
 
-const siteUrl = (
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  "https://toolnest-lyart.vercel.app"
-).replace(/\/+$/, "");
+import { siteUrl } from "../lib/site";
 
 export const metadata = {
   metadataBase: new URL(siteUrl),
@@ -20,6 +17,7 @@ export const metadata = {
   verification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
     ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }
     : undefined,
+  alternates: { canonical: "/" },
   robots: { index: true, follow: true },
   openGraph: {
     type: "website",
@@ -27,8 +25,10 @@ export const metadata = {
     url: siteUrl,
     title: "Free Online Tools: Converters, Calculators & Utilities",
     description:
-      "Useful browser tools for everyday work, study and development."
-  }
+      "Useful browser tools for everyday work, study and development.",
+    locale: "en_IN"
+  },
+  twitter: { card: "summary", title: "ToolNest – Free Online Tools", description: "Free calculators, PDF, image, text and developer tools." }
 };
 
 export default function RootLayout({ children }) {

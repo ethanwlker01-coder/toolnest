@@ -3,14 +3,28 @@ import tools from "../lib/tools.json";
 import categories from "../lib/categories.json";
 import AdSlot from "../components/AdSlot";
 import AdsterraNativeBanner from "../components/AdsterraNativeBanner";
+import { siteUrl, toolIsIndexable } from "../lib/site";
 
 const groups = [...new Set(tools.map((t) => t.category))];
 
-export const metadata = { alternates: { canonical: process.env.NEXT_PUBLIC_SITE_URL || "https://toolnest.qd.je" } };
+export const metadata = {
+  title: { absolute: "ToolNest – Free Online Tools: PDF, Image, Calculators & More" },
+  description: "Free online PDF tools, image converters, calculators, text and developer utilities. No signup, most tools run right in your browser.",
+  alternates: { canonical: siteUrl }
+};
+
+const siteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "ToolNest",
+  url: siteUrl,
+  potentialAction: { "@type": "SearchAction", target: `${siteUrl}/search?q={search_term_string}`, "query-input": "required name=search_term_string" }
+};
 
 export default function HomePage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(siteJsonLd) }} />
       <header className="site-header">
         <div className="header-inner">
           <Link className="brand" href="/">Tool<span>Nest</span></Link>
@@ -29,11 +43,11 @@ export default function HomePage() {
             <button type="submit">Search tools</button>
           </form>
           <div className="stat-row">
-            <div className="stat"><b>{tools.length}</b><span className="small muted">canonical tool pages</span></div>
+            <div className="stat"><b>{tools.length}</b><span className="small muted">free online tools</span></div>
             <div className="stat"><b>Browser-first</b><span className="small muted">for supported tools</span></div>
             <div className="stat"><b>No account</b><span className="small muted">required for the core tools</span></div>
           </div>
-          <p className="small muted">Privacy note: only claim that data stays on your device for tools that truly process everything locally. Some advanced conversions may require a browser library or a separately configured API.</p>
+          <p className="small muted">Most tools process your input in your browser. Each tool page explains its features, limits and how your data is handled.</p>
         </section>
 
         <AdSlot slot={process.env.NEXT_PUBLIC_ADSENSE_HOME_SLOT} />
@@ -53,7 +67,7 @@ export default function HomePage() {
                 <div className="tool-grid">
                   {entries.map((tool) => (
                     <Link className="tool-card" href={`/tools/${tool.slug}`} key={tool.slug}>
-                      <span className="pill">{tool.status === "ai-planned" ? "AI integration planned" : tool.status === "server-required" ? "Server setup required" : tool.status === "limited" ? "Limited functionality" : tool.indexReady ? "Ready for review" : "Not indexed yet"}</span>
+                      <span className="pill">{toolIsIndexable(tool) ? "Free" : "Coming soon"}</span>
                       <h3>{tool.name}</h3>
                       <p>{tool.description}</p>
                       <strong>Open tool →</strong>
@@ -63,6 +77,11 @@ export default function HomePage() {
               </div>
             );
           })}
+        </section>
+        <section className="tool-copy">
+          <h2>Why use ToolNest?</h2>
+          <p>ToolNest is a collection of free online tools for everyday tasks: merge, split and compress PDFs, convert and resize images, calculate EMI, GST and BMI, clean up text, and format JSON or generate SEO tags. There is nothing to install and no account to create.</p>
+          <p>Where a tool runs entirely in your browser, it says so on its page, so your files are not uploaded to our servers for that operation. Every tool lists its limitations, so you know what to double-check before relying on the result.</p>
         </section>
         <AdSlot slot={process.env.NEXT_PUBLIC_ADSENSE_FOOTER_SLOT} />
         <footer className="footer">

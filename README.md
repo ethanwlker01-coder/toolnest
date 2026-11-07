@@ -20,7 +20,7 @@ Next.js App Router project with 110 unique tool routes across 10 categories. Des
 PDF-to-images, PDF text extraction, OCR, and live currency rates depend on browser worker/service availability and must be tested after installation. OCR is English-only. PDF optimization reports measured file size and does not promise compression. DOCX-to-PDF fidelity, AI models/APIs and platform downloaders are not falsely presented as complete; see `IMPLEMENTATION_STATUS.md`.
 
 ## Release checklist
-- Confirm `toolnest.qd.je` resolves to the deployment and supports HTTPS before using it as the canonical origin.
+- Canonical origin is `https://toolnest-lyart.vercel.app` unless `NEXT_PUBLIC_SITE_URL` is set. Tool pages are indexed by default; set `INDEX_TOOLS=false` to switch indexing off.
 - Test a representative sample from every tool category and all file operations.
 - Review privacy policy to match actual processing and any external rate/OCR services.
 - Keep unfinished routes out of the sitemap and noindex.
