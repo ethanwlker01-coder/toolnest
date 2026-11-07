@@ -1,6 +1,5 @@
 import "./globals.css";
 import AnalyticsTracker from "../components/AnalyticsTracker";
-import Script from "next/script";
 
 import { siteUrl } from "../lib/site";
 
@@ -31,6 +30,10 @@ export const metadata = {
   twitter: { card: "summary", title: "ToolNest – Free Online Tools", description: "Free calculators, PDF, image, text and developer tools." }
 };
 
+const adsenseClient = /^ca-pub-\d{10,}$/.test(process.env.NEXT_PUBLIC_ADSENSE_CLIENT || "")
+  ? process.env.NEXT_PUBLIC_ADSENSE_CLIENT
+  : "";
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
@@ -39,23 +42,19 @@ export default function RootLayout({ children }) {
           name="google-adsense-account"
           content="ca-pub-7526438521592642"
         />
+        {adsenseClient ? (
+          <script
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`}
+            crossOrigin="anonymous"
+          />
+        ) : null}
       </head>
 
       <body>
         <AnalyticsTracker />
 
-        {process.env.NEXT_PUBLIC_ADSENSE_CLIENT &&
-        /^ca-pub-\d{10,}$/.test(
-          process.env.NEXT_PUBLIC_ADSENSE_CLIENT
-        ) ? (
-          <Script
-            async
-            strategy="afterInteractive"
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_CLIENT}`}
-            crossOrigin="anonymous"
-          />
-        ) : null}
-
+        
         <a className="skip-link" href="#main">
           Skip to content
         </a>
